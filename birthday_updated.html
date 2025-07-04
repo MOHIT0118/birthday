@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to bottom right, #ffe4ec, #fff8f8);
+      overflow-x: hidden;
+    }
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    header h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      color: #ff69b4;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-top: 1rem;
+    }
+    button.play-btn {
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, #ff85c1, #ffa6c9);
+      color: white;
+      border: none;
+      border-radius: 2rem;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+      transition: transform 0.2s, box-shadow 0.3s ease;
+    }
+    button.play-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
+    }
+    .music-container {
+      margin-top: 1rem;
+    }
+    audio {
+      width: 300px;
+      margin-top: 10px;
+    }
+    .about, .gallery {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .gallery-images {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .gallery-images img {
+      width: 250px;
+      height: auto;
+      margin: 10px;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px rgba(255, 192, 203, 0.5);
+    }
+    .message-btn {
+      margin-top: 2rem;
+      background: #ff69b4;
+      color: white;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+    }
+    .message-btn:hover {
+      background: #ff85c1;
+    }
+    .hidden-message {
+      display: none;
+      font-size: 1.1rem;
+      color: #c71585;
+      margin-top: 1.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-style: italic;
+    }
+    footer {
+      padding: 2rem;
+      background: #fff0f5;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Happy Independence Day</h1>
+    <p>My favorite stranger 💖</p>
+    <button class="play-btn" onclick="playMusic()">Start Music 🎶</button>
+    <div class="music-container">
+      <audio id="bgMusic" src="I Think They Call This Love Ringtone Download - MobCup.Com.Co.mp3" controls loop></audio>
+    </div>
+  </header>
+
+  <section class="about">
+    <h2>About You</h2>
+    <p>You’re kind, elegant, strong, and absolutely unforgettable. Here’s to your day 🌟</p>
+    <p style="color: #d63384; font-style: italic; margin-top: 1rem;">
+      I still don't understand how you manage to look different every time. Of course it's a filter... LMAO 😄 But whatever, you're beautiful 💗
+    </p>
+  </section>
+
+  <section class="gallery">
+    <h2>Memories</h2>
+    <div class="gallery-images">
+      <img src="mi.jpg" alt="Left Side">
+      <img src="mi2.jpg" alt="Center">
+      <img src="mi.jpg" alt="Right Side">
+    </div>
+    <button class="message-btn" onclick="showMessage()">Click Here 💌</button>
+    <div class="hidden-message" id="bdayMessage">
+      Happy Birthday, Nandini 🎂 — hope I can taste your cake with melted chocolate on it lol. <br>
+      Ab isse zyada bakc**di nahi kar paaunga... Most love 🩷
+    </div>
+  </section>
+
+  <footer>
+    Made with 💗 just for you.
+  </footer>
+
+  <script>
+    function playMusic() {
+      const music = document.getElementById("bgMusic");
+      music.play();
+    }
+    function showMessage() {
+      document.getElementById("bdayMessage").style.display = "block";
+    }
+  </script>
+</body>
+</html>
