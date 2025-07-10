@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Birthday</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -26,6 +27,7 @@
       transform: translateX(-50%) rotate(45deg);
       z-index: 0;
     }
+
     .floating-heart::before,
     .floating-heart::after {
       content: "";
@@ -35,8 +37,10 @@
       background: pink;
       border-radius: 50%;
     }
+
     .floating-heart::before { top: -10px; left: 0; }
     .floating-heart::after { left: -10px; top: 0; }
+
     @keyframes float {
       0% { transform: translateY(0) rotate(45deg); opacity: 1; }
       100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
@@ -52,16 +56,33 @@
       padding: 2rem;
       z-index: 1;
     }
+
     header h1 {
       font-family: 'Great Vibes', cursive;
       font-size: 3.5rem;
       color: #ff69b4;
     }
-    header p {
+
+    #typed-text {
       font-size: 1.2rem;
       color: #555;
       margin-top: 1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #ff69b4;
+      width: 0;
+      animation: typing 4s steps(30, end) forwards, blink 0.75s step-end infinite;
     }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 18ch; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
     button.play-btn {
       padding: 1rem 2rem;
       background: linear-gradient(45deg, #ff85c1, #ffa6c9);
@@ -74,35 +95,47 @@
       box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
       transition: transform 0.2s, box-shadow 0.3s ease;
     }
+
     button.play-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
     }
+
     .music-container {
       margin-top: 1rem;
     }
+
     audio {
       width: 300px;
       margin-top: 10px;
     }
+
     .about, .gallery {
       padding: 4rem 2rem;
       text-align: center;
       z-index: 1;
     }
+
     .gallery-images {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 2rem;
     }
+
     .gallery-images img {
       width: 250px;
       height: auto;
       margin: 10px;
       border-radius: 1rem;
-      box-shadow: 0 0 15px rgba(255, 192, 203, 0.5);
+      box-shadow: 0 0 25px rgba(255, 182, 193, 0.6), 0 0 40px rgba(255, 192, 203, 0.5);
+      transition: transform 0.3s ease-in-out;
     }
+
+    .gallery-images img:hover {
+      transform: scale(1.05);
+    }
+
     .message-btn {
       margin-top: 2rem;
       background: #ff69b4;
@@ -114,9 +147,11 @@
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
     }
+
     .message-btn:hover {
       background: #ff85c1;
     }
+
     .hidden-message {
       display: none;
       font-size: 1.1rem;
@@ -127,6 +162,7 @@
       margin-right: auto;
       font-style: italic;
     }
+
     footer {
       padding: 2rem;
       background: #fff0f5;
@@ -137,6 +173,7 @@
   </style>
 </head>
 <body>
+
   <!-- Floating hearts -->
   <div class="floating-heart" style="left: 10%; animation-delay: 0s;"></div>
   <div class="floating-heart" style="left: 30%; animation-delay: 2s;"></div>
@@ -146,7 +183,7 @@
 
   <header>
     <h1>Happy Independence Day</h1>
-    <p>My favorite stranger 💖</p>
+    <p id="typed-text"></p>
     <button class="play-btn" onclick="playMusic()">Start Music 🎶</button>
     <div class="music-container">
       <audio id="bgMusic" src="I Think They Call This Love Ringtone Download - MobCup.Com.Co.mp3" controls loop></audio>
@@ -180,12 +217,40 @@
   </footer>
 
   <script>
+    const message = "My favorite stranger 💖";
+    let i = 0;
+    function typeText() {
+      if (i < message.length) {
+        document.getElementById("typed-text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeText, 80);
+      }
+    }
+    window.onload = typeText;
+
     function playMusic() {
       const music = document.getElementById("bgMusic");
+      music.volume = 0;
       music.play();
+      let vol = 0;
+      const fade = setInterval(() => {
+        if (vol < 1) {
+          vol += 0.05;
+          music.volume = Math.min(vol, 1);
+        } else {
+          clearInterval(fade);
+        }
+      }, 200);
     }
+
     function showMessage() {
       document.getElementById("bdayMessage").style.display = "block";
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#ff69b4', '#ffc0cb', '#ffe4ec']
+      });
     }
   </script>
 </body>
